@@ -1,4 +1,4 @@
-module github.com/ddld93/auth
+module github.com/ddld93/healthApp/users
 
 go 1.17
 
