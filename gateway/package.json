@@ -1,0 +1,31 @@
+{
+  "name": "gatetway_socket",
+  "version": "1.0.0",
+  "description": "gateway with socket and jwt middleway",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devServe": "nodemon index"
+  },
+  "author": "umar adamu jere",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "express-formidable": "^1.2.0",
+    "express-http-proxy": "^1.6.3",
+    "form-data": "^4.0.0",
+    "http-proxy": "^1.18.1",
+    "http-proxy-middleware": "^2.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "multer": "^1.4.4",
+    "nodemon": "^2.0.15",
+    "socket.io": "^2.3.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.6",
+    "utf-8-validate": "^5.0.8"
+  }
+}
