@@ -5,11 +5,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/rs/cors"
-
+	
 	"github.com/ddld93/healthApp/users/controller"
 	"github.com/ddld93/healthApp/users/routes"
+	
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 
