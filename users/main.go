@@ -8,7 +8,7 @@ import (
 	
 	"github.com/ddld93/healthApp/users/controller"
 	"github.com/ddld93/healthApp/users/routes"
-	
+
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
@@ -16,7 +16,7 @@ import (
 
 func main() {
 	port := "5000"
-	userCtrl := controller.NewUserCtrl("localhost", 27017)
+	userCtrl := controller.NewUserCtrl("mongo", 27017)
 	route := routes.UserRoute{UserCtrl: userCtrl}
 	r := mux.NewRouter() 
 
