@@ -22,9 +22,8 @@ services:
     image: gateway:v1
     restart: always
     ports:
-      - 80:80
+      - 80:4000
     depends_on:           
-      - mongo
       - forms
       - auth
   
