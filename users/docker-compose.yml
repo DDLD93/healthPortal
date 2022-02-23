@@ -1,0 +1,32 @@
+version: '3'
+services:   
+  mongo:      
+    image: mongo:4.4.12      
+    ports:         
+      - 27017:27017        
+  auth:      
+    image: auth:v1
+    restart: always  
+    ports: 
+      - 5000:5000        
+    depends_on:           
+      - mongo
+  forms:
+    image: forms:v1
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:           
+      - mongo
+  gateway:
+    image: gateway:v1
+    restart: always
+    ports:
+      - 80:80
+    depends_on:           
+      - mongo
+      - forms
+      - auth
+  
+
+ 

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/ddld93/database/model"
+	"github.com/ddld93/healthApp/forms/model"
 )
 
 func FormModelValidate(user *model.Form)  (*model.Form, error){

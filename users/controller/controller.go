@@ -3,11 +3,11 @@ package controller
 import (
 	"errors"
 	"fmt"
+
 	"log"
 
-	"github.com/ddld93/database/model"
-	"github.com/ddld93/database/utils"
-	
+	"github.com/ddld93/healthApp/users/model"
+	"github.com/ddld93/healthApp/users/utilities"
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -17,11 +17,11 @@ type DB_Connect struct {
 	Session *mgo.Session
 }
 var (
-	database = "forms"
-	collection= "forms_collection"
+	database = "user"
+	collection= "user_collection"
 )
 
-func NewConnCtrl(host string, port int) *DB_Connect {
+func NewUserCtrl(host string, port int) *DB_Connect {
 	url := fmt.Sprintf("mongodb://%s:%d", host, port)
 	session, err := mgo.Dial(url)
 	if err != nil {
@@ -30,37 +30,78 @@ func NewConnCtrl(host string, port int) *DB_Connect {
 	return &DB_Connect{Session: session}
 }
 
-
-func (sess *DB_Connect) NewEntry(form *model.Form) (string, error) {
+func (u *DB_Connect) CreateUser(user *model.User) ( error) {
 	// validating user inputs
-	forms, err  := utilities.FormModelValidate(form)
+	user, err  := utilities.UserModelValidate(user)
 	if err != nil{
-		return "",err
+		return err
 	}
-	
-	err2 := sess.Session.DB(database).C(collection).Insert(forms)
+	//checking if user with same email exist
+	resp,_:= u.Session.DB(database).C(collection).Find(bson.M{"email":user.Email}).Count()
+	if resp >= 1 {
+		return errors.New("an Account with this email already exist")
+	}
+	err2 := u.Session.DB(database).C(collection).Insert(user)
 	if err2 != nil {
-		fmt.Println("Error inserting new form ", err2)
-		return "", err2
+	
+		return errors.New("error inserting new user")
 	}
-	return "form submitted successfull", nil
+	return nil
 }
 
-func (sess *DB_Connect) GetForm(email string) (*model.Form, error) {
-	form := model.Form{}
-	err := sess.Session.DB(database).C(collection).Find(bson.M{"userEmail":email}).One(&form)
+func (u *DB_Connect) GetUser(email string) (*model.User, error) {
+	user := model.User{}
+	err := u.Session.DB(database).C(collection).Find(bson.M{"email":email}).One(&user)
 	if err != nil {
-		return &form, errors.New("error getting form information from database")
+		return &user, errors.New("error getting user by email ")
 	}
-	return &form, nil
+	return &user, nil
+}
+func (u *DB_Connect) UpdatePayment(email string, paymentInfo model.PaymentInfo) error{
+err := u.Session.DB(database).C(collection).Update(bson.M{"email": email},
+bson.D{
+	{"$set", bson.D{{"isPayment", true},{"paymentInfo", paymentInfo}}},
+},)
+if err != nil {
+	return errors.New("Error updating payment status")
+}
+return nil
 }
 
-func (sess *DB_Connect) GetForms() ([]model.Form, error) {
-	form := []model.Form{}
-	err := sess.Session.DB(database).C(collection).Find(bson.M{}).All(&form)
+func (u *DB_Connect) UpdateForm(email string) error{
+	err := u.Session.DB(database).C(collection).Update(bson.M{"email": email},
+	bson.D{
+		{"$set", bson.D{{"isSubmitted", true}}},
+	},)
 	if err != nil {
-		return form, errors.New("error getting forms ")
-	}	
-	return form, nil
+		return err
+	}
+	return nil
+	}
+
+func (u *DB_Connect) GetUsers() (*[]model.User, error) {
+	users := []model.User{}
+	err := u.Session.DB(database).C(collection).Find(bson.M{}).All(&users)
+	if err != nil {
+		return &users, errors.New("error getting user by email ")
+	}
+	return &users, nil
 }
 
+
+func (u *DB_Connect) GetPaidUsers() (*[]model.User, error) {
+	users := []model.User{}
+	err := u.Session.DB(database).C(collection).Find(bson.M{"isPayment":true}).All(&users)
+	if err != nil {
+		return &users, errors.New("error getting user by email ")
+	}
+	return &users, nil
+}
+func (u *DB_Connect) DeleteUser(id string) error {
+	idHex := bson.ObjectIdHex(id)
+	err := u.Session.DB(database).C(collection).RemoveId(idHex)
+	if err != nil {
+		return errors.New("error deleting user form database ")
+	}
+	return nil
+}

@@ -7,9 +7,9 @@ import (
 
 	"net/http"
 
-	"github.com/ddld93/database/controller"
-	"github.com/ddld93/database/model"
-	utilities "github.com/ddld93/database/utils"
+	"github.com/ddld93/healthApp/forms/controller"
+	"github.com/ddld93/healthApp/forms/model"
+	utilities "github.com/ddld93/healthApp/forms/utils"
 	"github.com/gorilla/mux"
 )
 

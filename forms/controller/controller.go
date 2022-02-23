@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ddld93/database/model"
-	"github.com/ddld93/database/utils"
+	"github.com/ddld93/healthApp/forms/model"
+	"github.com/ddld93/healthApp/forms/utils"
 	
 
 	"gopkg.in/mgo.v2"
