@@ -17,7 +17,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./forms:/root/images
+      - ./images:/root/images
     depends_on:           
       - mongo
   gateway:
