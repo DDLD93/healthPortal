@@ -30,7 +30,7 @@ func FormModelValidate(user *model.Form)  (*model.Form, error){
 }
 func FormFlagToggle(email string) error{
 	
-	url := "http://localhost:5000/formflag/" + email
+	url := "http://auth:5000/formflag/" + email
 
     // Create a new request using http
     req, _ := http.NewRequest("GET", url, nil)
