@@ -337,7 +337,7 @@
             </v-stepper>
           </v-card>
           <v-card
-            v-else-if="user.isPayment == true && user.isSubmitted == true"
+            v-else-if="user.isPayment == true && isSubmityar == true"
           >
             <v-card-title class="text-body-1 font-weight-bold pa-2">
               Application Summary
@@ -348,7 +348,7 @@
                 <v-col cols="12">
                   <div class="d-flex justify-center">
                     <v-avatar size="200">
-                      <img src="file:///C:/Users/DDLD/go/src/github.com/ddld93/database/images/namuda@yahoo.com3407049837.png" alt="Logo" />
+                      <img width="50" height="50" src="https://images.pexels.com/photos/11189614/pexels-photo-11189614.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Logo" />
                     </v-avatar>
                   </div>
                 </v-col>
@@ -451,6 +451,9 @@ export default {
     user() {
       return this.$store.getters.getUser;
     },
+    isSubmit() {
+      return this.$store.getters.getIsSubmit;
+    }
   },
   methods: {
     Preview_image() {
@@ -481,7 +484,7 @@ export default {
           console.log("Response", response);
           setTimeout(() => {
             router.push("/");
-            this.$store.state.user.isSubmitted = true
+            localStorage.setItem("isSubmit","true")
           }, 2000);
         })
         .catch((error) => {

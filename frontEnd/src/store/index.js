@@ -16,12 +16,14 @@ export default new Vuex.Store({
             signInSuccessSnackbar: false,
             signInSuccessPayload: null,
         },
-        online: 0
+        online: 0,
+        isSubmit: localStorage.getItem("isSubmit") || false,
     },
     getters: {
         getUser: (state) => state.user,
         getToken: (state) => state.token,
         getOnline: (state) => state.online,
+        getIsSubmit: (state) => state.isSubmit,
     },
     mutations: {
         loginUser(state, userData) {
@@ -49,8 +51,8 @@ export default new Vuex.Store({
             state.signIn.signInErrorSnackbar = true;
             state.signIn.signInErrorPayload = error;
         },
-        online(state, data) {
-            state.online = data
+        submit(state, data) {
+            state.isSubmit = data
         }
     },
     actions: {
@@ -133,6 +135,7 @@ export default new Vuex.Store({
                     }
                 })
                 .catch((error) => {
+                    this._vm.$toast.error(error.message);
                     console.log("Error>>>>>>>>>>>>>", error);
                     // commit("signUpError", error);
                     commit("stopLoader");

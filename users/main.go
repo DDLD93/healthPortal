@@ -16,7 +16,7 @@ import (
 
 func main() {
 	port := "5000"
-	userCtrl := controller.NewUserCtrl("mongo", 27017)
+	userCtrl := controller.NewUserCtrl("localhost", 27017)
 	route := routes.UserRoute{UserCtrl: userCtrl}
 	r := mux.NewRouter() 
 
