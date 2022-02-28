@@ -135,14 +135,7 @@
 
 import paystack from "vue-paystack";
 import router from '../router';
-import  io  from "socket.io-client";
-const socket = io("http://localhost:4000");
-socket.on("connect", () => {
-  console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-});
-socket.on('online', function(msg){
-        console.log(msg);
-      });
+
 // import LineChart from "../components/LineChart.vue";
 export default {
   name: "Home",

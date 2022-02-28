@@ -24,7 +24,7 @@ services:
     build: ./gateway
     restart: always
     ports:
-      - 80:4000
+      - 4000:4000
   
 
  
