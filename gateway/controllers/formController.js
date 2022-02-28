@@ -1,17 +1,12 @@
 const axios = require("axios").default;
+var cfg = require("../cfg");
 
 
-
-// const newform = (req, res) => {
-//   var newurl = 'http://localhost:3000/newform';
-//   request(newurl).pipe(res);
-  
-// };
 
 const forms = (req, res) => {
   var config = {
     method: "get",
-    url: "http://localhost:3000/getforms",
+    url: `http://${cfg.FORMS}/getforms`,
     headers: {
       "Content-Type": "application/json",
     },
@@ -31,7 +26,7 @@ const form = (req, res) => {
    
      var config = {
        method: "get",
-       url: `http://localhost:3000/getform/${email}`,
+       url: `http://${cfg.FORMS}/getform/${email}`,
        headers: {
          "Content-Type": "application/json",
        },

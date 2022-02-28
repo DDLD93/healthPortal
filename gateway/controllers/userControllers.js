@@ -7,7 +7,7 @@ const login = (req, res) => {
   
     var config = {
       method: "post",
-      url: "http://localhost:5000/login",
+      url: `http://${cfg.AUTH}/login`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -49,7 +49,7 @@ const register = (req, res) => {
   var data = JSON.stringify(req.body);
   var config = {
     method: "post",
-    url: "http://localhost:5000/signup",
+    url: `http://${cfg.AUTH}/signup`,
     headers: {
       "Content-Type": "application/json",
     },
@@ -69,7 +69,7 @@ const getUsers = (req, res) => {
   
     var config = {
       method: "get",
-      url: "http://localhost:5000/users",
+      url: `http://${cfg.AUTH}/users`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -88,7 +88,7 @@ const getUser = (req, res) => {
    
      var config = {
        method: "get",
-       url: `http://localhost:5000/user/${email}`,
+       url: `http://${cfg.AUTH}/user/${email}`,
        headers: {
          "Content-Type": "application/json",
        },
@@ -107,7 +107,7 @@ const getUser = (req, res) => {
    
      var config = {
        method: "delete",
-       url: `http://localhost:5000/delete/${id}`,
+       url: `http://${cfg.AUTH}/delete/${id}`,
        headers: {
          "Content-Type": "application/json",
        },
@@ -125,7 +125,7 @@ const getAnalytics = (req, res) => {
 
     var config = {
       method: "get",
-      url: "http://localhost:5000/analytics",
+      url: `http://${cfg.AUTH}/analytics`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -148,7 +148,7 @@ const payStack = (req, res) => {
  
   var config = {
       method: "get",
-      url: `http://localhost:5000/paystack/${refNo}/${email}`,
+      url: `http://${cfg.AUTH}/paystack/${refNo}/${email}`,
       headers: {
         "Content-Type": "application/json",
       },
