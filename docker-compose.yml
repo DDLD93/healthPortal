@@ -5,27 +5,26 @@ services:
     ports:         
       - 27017:27017        
   auth:      
-    image: auth:v1
+    build: ./users
     restart: always  
     ports: 
-      - 5000:5000        
+      - 5000:5000          
     depends_on:           
       - mongo
   forms:
-    image: forms:v1
+    build: ./forms
     restart: always
     ports:
       - 3000:3000
+    volumes:
+      - ./forms:/root/images
     depends_on:           
       - mongo
   gateway:
-    image: gateway:v1
+    build: ./gateway
     restart: always
     ports:
       - 80:4000
-    depends_on:           
-      - forms
-      - auth
   
 
  
