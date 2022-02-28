@@ -9,6 +9,6 @@ module.exports = {
     // 3. Express listening  Port
     LISTEN_PORT: process.env.LISTEN_PORT || 4000,
 
-    AUTH: process.env.AUTH_SERVICES || "auth",
-    FORMS: process.env.FORMS_SERVICES || "forms"
+    AUTH: process.env.AUTH_SERVICES || "auth:5000",
+    FORMS: process.env.FORMS_SERVICES || "forms:3000"
   };
